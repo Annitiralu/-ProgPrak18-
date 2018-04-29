@@ -61,7 +61,7 @@
             </header>
         </div>
         <main>
-            <div class="container">
+            <div class="container"> <!-- Tabelle, wird aus JSON-Strings erstellt-->
                 <table class="table table-hover table-striped table-responsive" id="Tabelle">
                     <thead>
                         <tr>
@@ -73,12 +73,12 @@
                     </thead>
                 </table>
                 <a class="btn btn-info" id="neu" href="./new.html">Neu</a>
-                <div >
-                    <form action="post" id="bearbeiten">
+                <div> <!-- Formular zum verändern der Einträge, ist standartmäßíg ausgegraut-->
+                    <form method="post" id="bearbeiten">
                         <div class="form-group">
                             <label class="control-label col-sm-2">Deadline:</label>
                             <div class="col-sm-10">
-                                <input id="Deadline" class="form-control" type=date name="Deadline" autofocus=on required>
+                                <input id="Deadline" class="form-control" type=text name="Deadline" autofocus=on required>
                             </div>
                         </div>
                         <div class="form-group">
@@ -102,7 +102,7 @@
             </div>
         </main>
     </div>
-    <script>
+    <script> //JSON mit Aufgaben
         var Aufgaben = [{
             "Deadline": "26.04.2018",
             "Aufgabe": "Konzept Todo-System fertig stellen",
@@ -117,7 +117,7 @@
             "Aufgabe": "fertiges ToDo-System in git hochladen",
             "Fortschritt": "0%"
         }];
-
+        //Funktion zum Erstellen der Tabelle
         function Tabelle(data) {
             var tab = document.createElement("tbody");
             var feld = Object.keys(data[0]);
@@ -133,16 +133,19 @@
                 button.innerHTML = "Bearbeiten";
                 button.setAttribute("class", "btn btn-info");
                 button.setAttribute("id", "btn" + count);
+                //Funktion als Eventlistener zum Fülle und ANzeigen des Bearbeiten-Formulars und Ausblenden der Tabelle
                 button.addEventListener("click", function bearbeiten(e) {
                     var c = button.getAttribute("id");
                     c = c.slice(3, c.length);
                     var info = Aufgaben[c];
                     var tab = document.getElementById("Tabelle");
                     tab.setAttribute("style", "display:none;");
+                    var btnneu = document.getElementById("neu");
+                    btnneu.setAttribute("style", "display:none;");
                     var Formular = document.getElementById("bearbeiten");
                     Formular.setAttribute("style", "display:block;");
                     var date = document.getElementById("Deadline");
-                    date.innerHTML=info.Deadline;
+                    date.setAttribute("value",info.Deadline);
                     var Text = document.getElementById("Aufgabe");
                     Text.innerHTML = info.Aufgabe;
                     var Prozent = document.getElementById("Fortschritt");
@@ -157,12 +160,14 @@
 
             return tab;
         }
-
+//Funktion zum Ausblenden des Bearbeiten-Formulars und einblenden der Tabelle
         function hideBearbeiten() {
             var Tabel = document.getElementById("Tabelle");
             Tabel.setAttribute("style", "display:block;")
             var Formular = document.getElementById("bearbeiten");
             Formular.setAttribute("style", "display:none;");
+            var btnneu = document.getElementById("neu");
+            btnneu.setAttribute("style", "display:none;");
         }
         var Tabel = document.getElementById("Tabelle");
         Tabel.appendChild(Tabelle(Aufgaben));
