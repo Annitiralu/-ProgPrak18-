@@ -33,6 +33,10 @@
             padding: 14px 16px;
             text-decoration: none;
         }
+
+        form {
+            display: none;
+        }
     </style>
 </head>
 
@@ -46,7 +50,7 @@
                         <div class="small">
                             <h4>It does not matter how slowly you go as long as you do not stop - Konfuzius</h4>
                         </div>
-                        
+
                     </div>
                     <div class="navbar">
                         <ul class="nav navbar-nav navbar-right mr-auto fixed-bottom" style="display: inline;">
@@ -69,64 +73,105 @@
                     </thead>
                 </table>
                 <a class="btn btn-info" id="neu" href="./new.html">Neu</a>
+                <div >
+                    <form action="post" id="bearbeiten">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Deadline:</label>
+                            <div class="col-sm-10">
+                                <input id="Deadline" class="form-control" type=date name="Deadline" autofocus=on required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Aufgabe:</label>
+                            <div class="col-sm-10">
+                                <textarea id="Aufgabe" class="form-control" name="Aufgabe" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Fortschritt:</label>
+                            <div class="col-sm-10">
+                                <textarea id="Fortschritt" class="form-control" name="Fortschritt" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-10">
+                            <button class="btn btn-info" onclick="hideBearbeiten()">Fertig</button>
+                            <button class="btn btn-light" onclick="hideBearbeiten()">Abbrechen</button>
+                        </div>
+                    </form>
+                </div>
             </div>
         </main>
     </div>
-        <script>
+    <script>
         var Aufgaben = [{
-                "Deadline": "26.04.2018",
-                "Aufgabe": "Konzept Todo-System fertig stellen",
-                "Fortschritt": "80%"
-            }, {
-                "Deadline": "27.04.2018",
-                "Aufgabe": "Fragen und Probleme notieren zum Nachfragen",
-                "Fortschritt": "45%"
+            "Deadline": "26.04.2018",
+            "Aufgabe": "Konzept Todo-System fertig stellen",
+            "Fortschritt": "80%"
+        }, {
+            "Deadline": "27.04.2018",
+            "Aufgabe": "Fragen und Probleme notieren zum Nachfragen",
+            "Fortschritt": "45%"
 
-            }, {
-                "Deadline": "29.04.2018",
-                "Aufgabe": "fertiges ToDo-System in git hochladen",
-                "Fortschritt": "0%"
-            }];
-            function Tabelle(data) {
-                var tab = document.createElement("tbody");
-                var feld = Object.keys(data[0]);
-                var count = 0;
-                data.forEach(function(object) {
-                    var spalte = document.createElement("tr");
-                    feld.forEach(function(field) {
-                        var eintrag = document.createElement("td");
-                        eintrag.textContent = object[field];
-                        spalte.appendChild(eintrag);
-                    });
-                    var button = document.createElement("button");
-                    button.innerHTML = "Bearbeiten";
-                    button.setAttribute("class", "btn btn-info");
-                    button.setAttribute("id", "btn"+count);
-                    button.addEventListener("click", function bearbeiten(e) {
-                        var c = button.getAttribute("id");
-                        c = c.slice(3,c.length);
-                        var info = Aufgaben[c];
-                        alert(info.Aufgabe);
-                    });
-                    var buttonfeld = document.createElement("td");
-                    buttonfeld.appendChild(button);
-                    spalte.appendChild(buttonfeld);
-                    tab.appendChild(spalte);
-                    count ++;
+        }, {
+            "Deadline": "29.04.2018",
+            "Aufgabe": "fertiges ToDo-System in git hochladen",
+            "Fortschritt": "0%"
+        }];
+
+        function Tabelle(data) {
+            var tab = document.createElement("tbody");
+            var feld = Object.keys(data[0]);
+            var count = 0;
+            data.forEach(function(object) {
+                var spalte = document.createElement("tr");
+                feld.forEach(function(field) {
+                    var eintrag = document.createElement("td");
+                    eintrag.textContent = object[field];
+                    spalte.appendChild(eintrag);
                 });
+                var button = document.createElement("button");
+                button.innerHTML = "Bearbeiten";
+                button.setAttribute("class", "btn btn-info");
+                button.setAttribute("id", "btn" + count);
+                button.addEventListener("click", function bearbeiten(e) {
+                    var c = button.getAttribute("id");
+                    c = c.slice(3, c.length);
+                    var info = Aufgaben[c];
+                    var tab = document.getElementById("Tabelle");
+                    tab.setAttribute("style", "display:none;");
+                    var Formular = document.getElementById("bearbeiten");
+                    Formular.setAttribute("style", "display:block;");
+                    var date = document.getElementById("Deadline");
+                    date.innerHTML=info.Deadline;
+                    var Text = document.getElementById("Aufgabe");
+                    Text.innerHTML = info.Aufgabe;
+                    var Prozent = document.getElementById("Fortschritt");
+                    Prozent.innerHTML = info.Fortschritt;
+                });
+                var buttonfeld = document.createElement("td");
+                buttonfeld.appendChild(button);
+                spalte.appendChild(buttonfeld);
+                tab.appendChild(spalte);
+                count++;
+            });
 
-                return tab;
-            }
+            return tab;
+        }
 
-            
+        function hideBearbeiten() {
             var Tabel = document.getElementById("Tabelle");
-            Tabel.appendChild(Tabelle(Aufgaben));
-        </script>
-        <!-- Optional JavaScript -->
-        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+            Tabel.setAttribute("style", "display:block;")
+            var Formular = document.getElementById("bearbeiten");
+            Formular.setAttribute("style", "display:none;");
+        }
+        var Tabel = document.getElementById("Tabelle");
+        Tabel.appendChild(Tabelle(Aufgaben));
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
 </body>
 
 </html>
