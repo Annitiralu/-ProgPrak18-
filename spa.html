@@ -94,7 +94,7 @@
                             </div>
                         </div>
                         <div class="col-sm-10">
-                            <button class="btn btn-info" onclick="hideBearbeiten()">Fertig</button>
+                            <button class="btn btn-info" type=submit onclick="hideBearbeiten()">Fertig</button>
                             <button class="btn btn-light" onclick="hideBearbeiten()">Abbrechen</button>
                         </div>
                     </form>
@@ -167,7 +167,7 @@
             var Formular = document.getElementById("bearbeiten");
             Formular.setAttribute("style", "display:none;");
             var btnneu = document.getElementById("neu");
-            btnneu.setAttribute("style", "display:block;");
+            btnneu.setAttribute("style", "display:inline;");
         }
         var Tabel = document.getElementById("Tabelle");
         Tabel.appendChild(Tabelle(Aufgaben));
