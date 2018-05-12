@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>ToDo-System</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <style>
+        @media (max-width: 1000px) {
+            .small {
+                display: none;
+            }
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        form {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron" style="">
+            <header style="height:7em;">
+                <div class="col-sm-12">
+                    <div class="navbar-header">
+                        <h1>ToDo-System</h1>
+                        <div class="small">
+                            <h4>It does not matter how slowly you go as long as you do not stop - Konfuzius</h4>
+                        </div>
+
+                    </div>
+                    <div class="navbar">
+                        <ul class="nav navbar-nav navbar-right mr-auto fixed-bottom" style="display: inline;">
+                            <li><a href="Impressum.html">Impressum</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <main>
+            <div class="container"> <!-- Tabelle, wird aus JSON-Strings erstellt-->
+                <table class="table table-hover table-striped table-responsive" id="Tabelle">
+                    <thead>
+                        <tr>
+                            <th>Aufgabe</th>
+                            <th>Deadline</th>
+                            <th>Fortschritt</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+{% if task_list %}
+	<tbody>
+	{% for task in task_list %}
+		<tr>
+			<td>
+				<a href="{% url "change" task.id %}">{{task.task_text }}</a>
+			</td>
+			<td>{{task.deadline }}</td>
+			<td>{{task.progress }}</td>
+		</tr>
+	</tbody
+{% else %}
+	<p>Alles erledigt!</p>
+{% endif %}
+                </table>
+                <a class="btn btn-info" id="neu" href="./new.html">Neu</a>
+            </div>
+        </main>
+    </div>
+    <script>
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</body>
+
+</html>

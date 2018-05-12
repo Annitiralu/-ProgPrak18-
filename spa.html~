@@ -1,0 +1,182 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <title>ToDo-System</title>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <style>
+        @media (max-width: 1000px) {
+            .small {
+                display: none;
+            }
+        }
+
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+        }
+
+        li {
+            float: left;
+        }
+
+        li a {
+            display: block;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        form {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="jumbotron" style="">
+            <header style="height:7em;">
+                <div class="col-sm-12">
+                    <div class="navbar-header">
+                        <h1>ToDo-System</h1>
+                        <div class="small">
+                            <h4>It does not matter how slowly you go as long as you do not stop - Konfuzius</h4>
+                        </div>
+
+                    </div>
+                    <div class="navbar">
+                        <ul class="nav navbar-nav navbar-right mr-auto fixed-bottom" style="display: inline;">
+                            <li><a href="Impressum.html">Impressum</a> </li>
+                        </ul>
+                    </div>
+                </div>
+            </header>
+        </div>
+        <main>
+            <div class="container"> <!-- Tabelle, wird aus JSON-Strings erstellt-->
+                <table class="table table-hover table-striped table-responsive" id="Tabelle">
+                    <thead>
+                        <tr>
+                            <th>Deadline</th>
+                            <th>Aufgabe</th>
+                            <th>Fortschritt</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                </table>
+                <a class="btn btn-info" id="neu" href="./new.html">Neu</a>
+                <div> <!-- Formular zum verändern der Einträge, ist standartmäßíg ausgegraut-->
+                    <form method="post" id="bearbeiten">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Deadline:</label>
+                            <div class="col-sm-10">
+                                <input id="Deadline" class="form-control" type=text name="Deadline" autofocus=on required>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Aufgabe:</label>
+                            <div class="col-sm-10">
+                                <textarea id="Aufgabe" class="form-control" name="Aufgabe" required></textarea>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2">Fortschritt:</label>
+                            <div class="col-sm-10">
+                                <textarea id="Fortschritt" class="form-control" name="Fortschritt" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-sm-10">
+                            <button class="btn btn-info" onclick="hideBearbeiten()">Fertig</button>
+                            <button class="btn btn-light" onclick="hideBearbeiten()">Abbrechen</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script> //JSON mit Aufgaben
+        var Aufgaben = [{
+            "Deadline": "26.04.2018",
+            "Aufgabe": "Konzept Todo-System fertig stellen",
+            "Fortschritt": "80%"
+        }, {
+            "Deadline": "27.04.2018",
+            "Aufgabe": "Fragen und Probleme notieren zum Nachfragen",
+            "Fortschritt": "45%"
+
+        }, {
+            "Deadline": "29.04.2018",
+            "Aufgabe": "fertiges ToDo-System in git hochladen",
+            "Fortschritt": "0%"
+        }];
+        //Funktion zum Erstellen der Tabelle
+        function Tabelle(data) {
+            var tab = document.createElement("tbody");
+            var feld = Object.keys(data[0]);
+            var count = 0;
+            data.forEach(function(object) {
+                var spalte = document.createElement("tr");
+                feld.forEach(function(field) {
+                    var eintrag = document.createElement("td");
+                    eintrag.textContent = object[field];
+                    spalte.appendChild(eintrag);
+                });
+                var button = document.createElement("button");
+                button.innerHTML = "Bearbeiten";
+                button.setAttribute("class", "btn btn-info");
+                button.setAttribute("id", "btn" + count);
+                //Funktion als Eventlistener zum Fülle und ANzeigen des Bearbeiten-Formulars und Ausblenden der Tabelle
+                button.addEventListener("click", function bearbeiten(e) {
+                    var c = button.getAttribute("id");
+                    c = c.slice(3, c.length);
+                    var info = Aufgaben[c];
+                    var tab = document.getElementById("Tabelle");
+                    tab.setAttribute("style", "display:none;");
+                    var btnneu = document.getElementById("neu");
+                    btnneu.setAttribute("style", "display:none;");
+                    var Formular = document.getElementById("bearbeiten");
+                    Formular.setAttribute("style", "display:block;");
+                    var date = document.getElementById("Deadline");
+                    date.setAttribute("value",info.Deadline);
+                    var Text = document.getElementById("Aufgabe");
+                    Text.innerHTML = info.Aufgabe;
+                    var Prozent = document.getElementById("Fortschritt");
+                    Prozent.innerHTML = info.Fortschritt;
+                });
+                var buttonfeld = document.createElement("td");
+                buttonfeld.appendChild(button);
+                spalte.appendChild(buttonfeld);
+                tab.appendChild(spalte);
+                count++;
+            });
+
+            return tab;
+        }
+//Funktion zum Ausblenden des Bearbeiten-Formulars und einblenden der Tabelle
+        function hideBearbeiten() {
+            var Tabel = document.getElementById("Tabelle");
+            Tabel.setAttribute("style", "display:block;")
+            var Formular = document.getElementById("bearbeiten");
+            Formular.setAttribute("style", "display:none;");
+            var btnneu = document.getElementById("neu");
+            btnneu.setAttribute("style", "display:block;");
+        }
+        var Tabel = document.getElementById("Tabelle");
+        Tabel.appendChild(Tabelle(Aufgaben));
+    </script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</body>
+
+</html>
