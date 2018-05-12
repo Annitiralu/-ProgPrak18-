@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
 from .models import Task
 from .forms import PostForm
@@ -12,7 +12,16 @@ def index(request):
 
 
 def new(request):
-    form = PostForm()
+    if request.method == "POST":
+        form = PostForm(request.POST)
+        if form.is_valid():
+            post = form.save(commit=False)
+            post.progress = "0"
+            post.done = False
+            post.save()
+            return redirect("ToDoSystem:index")
+    else:
+        form = PostForm()
     return render(request, "ToDoSystem/new.html", {"form": form})
 
 
