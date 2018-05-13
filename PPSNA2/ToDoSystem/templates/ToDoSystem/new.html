@@ -33,6 +33,9 @@
             padding: 14px 16px;
             text-decoration: none;
         }
+         main {
+            margin-bottom: 4em;
+        }
     </style>
 </head>
 
@@ -44,12 +47,12 @@
                     <div class="navbar-header">
                         <h1>ToDo-System</h1>
                         <div class="small">
-                            <h4>It does not matter how slowly you go as long as you do not stop - Konfuzius</h4>
+                            <h5>Der frühe Vogel fängt den Wurm. Zum Glück hat der Döner bis 0 auf...</h5>
                         </div>
 
                     </div>
                     <div class="navbar">
-                        <ul class="nav navbar-nav navbar-right mr-auto fixed-bottom" style="display: inline;">
+                        <ul class="nav navbar-nav navbar-right mr-auto fixed-bottom bg-light" style="display: inline;">
                             <li><a href="{% url 'ToDoSystem:impressum' %}">Impressum</a> </li>
                         </ul>
                     </div>
@@ -62,8 +65,8 @@
                 {% csrf_token %}
                 {{ form.as_p }}
                 <button type="submit" class="btn btn-info">Erstellen</button>
+                <a class="btn btn-light" href="{% url 'ToDoSystem:index' %}">Abbrechen</a>
             </form>
-            <a class="btn btn-light" href="{% url 'ToDoSystem:index' %}">Abbrechen</a>
         </main>
     </div>
 

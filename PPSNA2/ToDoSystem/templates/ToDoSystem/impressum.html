@@ -33,6 +33,9 @@
             padding: 14px 16px;
             text-decoration: none;
         }
+        main {
+            margin-bottom: 4em;
+        }
     </style>
 </head>
 
@@ -44,13 +47,13 @@
                     <div class="navbar-header">
                         <h1>ToDo-System</h1>
                         <div class="small">
-                            <h4>It does not matter how slowly you go as long as you do not stop - Konfuzius</h4>
+                            <h5>Der frühe Vogel fängt den Wurm. Zum Glück hat der Döner bis 0 auf...</h5>
                         </div>
 
                     </div>
-                    <div class="navbar">
-                        <ul class="nav navbar-nav navbar-right mr-auto fixed-bottom" style="display: inline;">
-                            <li><a href="{% url 'ToDoSystem:impressum' %}">Übersicht</a> </li>
+                    <div class="navbar ">
+                        <ul class="nav navbar-nav navbar-right mr-auto fixed-bottom bg-light" style="display: inline;">
+                            <li><a href="{% url 'ToDoSystem:index' %}">Übersicht</a> </li>
                         </ul>
                     </div>
                 </div>
