@@ -38,6 +38,7 @@
             margin-bottom: 4em;
         }
 
+
     </style>
 </head>
 
@@ -49,7 +50,7 @@
                 <div class="navbar-header">
                     <h1>ToDo-System</h1>
                     <div class="small">
-                        <h5>Der frühe Vogel fängt den Wurm. Zum Glück hat der Döner bis 0 auf...</h5>
+                        <h5>Der frühe Vogel fängt den Wurm. Zum Glück hat der Döner bis Mitternacht auf...</h5>
                     </div>
 
                 </div>
@@ -67,23 +68,33 @@
                 <form method="post">
                     {% csrf_token %}
                     <div class="form-group">
-                            <label class="control-label col-sm-2">{{ form.deadline.label }}</label>
-                            <div class="col-sm-10">
-                                <input id="Deadline" class="form-control" type=date name="{{ form.deadline.name }}" {% if form.deadline.value != None %} value="{{ form.deadline.value|stringformat:'s' }}"{% endif %} autofocus=on required>
-                            </div>
+                        <label class="control-label col-sm-2">{{ form.deadline.label }}</label>
+                        <div class="col-sm-10">
+                            <input id="Deadline" class="form-control" type=date name="{{ form.deadline.name }}" {% if
+                                   form.deadline.value !=None %} value="{{ form.deadline.value|stringformat:'s' }}" {%
+                                   endif %} autofocus=on required>
+                            {{ form.deadline.errors }}
                         </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">{{ form.task_text.label }}</label>
-                            <div class="col-sm-10">
-                                <input id="Aufgabe" type=text class="form-control" name="{{ form.task_text.name }}" {% if form.task_text.value != None %} value="{{ form.task_text.value|stringformat:'s' }}"{% endif %} required></input>
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">{{ form.task_text.label }}</label>
+                        <div class="col-sm-10">
+                            <textarea id="Aufgabe" class="form-control" name="{{ form.task_text.name }}" required>{{ form.task_text.value }}</textarea>
+                            {{ form.task_text.errors }}
                         </div>
-                        <div class="form-group">
-                            <label class="control-label col-sm-2">{{ form.progress.label }}</label>
-                            <div class="col-sm-10">
-                                <input id="Fortschritt" type=text class="form-control" name="{{ form.progress.name }}" {% if form.progress.value != None %} value="{{ form.progress.value|stringformat:'s' }}"{% endif %} required></input>
-                            </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="control-label col-sm-2">Fortschritt</label>
+                        <div class="col-sm-10">
+                            <textarea id="Fortschritt" class="form-control" name="{{ form.progress.name }}" required>{{ form.progress.value }}</textarea>
+                            {{ form.progress.errors }}
                         </div>
+                    </div>
+                    <div class="checkbox">
+                        <label class="control-label col-sm-2">Löschen <input id="Done" type="checkbox"
+                                                                             name="{{ form.done.name }}"> </label>
+                        {{ form.done.errors }}
+                    </div>
                     <button type="submit" class="btn btn-info">Speichern</button>
                     <a class="btn btn-light" href="{% url 'ToDoSystem:index' %}">Abbrechen</a>
                 </form>

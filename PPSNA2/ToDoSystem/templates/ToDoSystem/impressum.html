@@ -8,7 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
     <!-- Bootstrap CSS -->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <style>
         @media (max-width: 1000px) {
             .small {
@@ -36,50 +37,59 @@
         main {
             margin-bottom: 4em;
         }
+
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <div class="jumbotron" style="">
-            <header style="height:7em;">
-                <div class="col-sm-12">
-                    <div class="navbar-header">
-                        <h1>ToDo-System</h1>
-                        <div class="small">
-                            <h5>Der frühe Vogel fängt den Wurm. Zum Glück hat der Döner bis 0 auf...</h5>
-                        </div>
+<div class="container">
+    <div class="jumbotron" style="">
+        <header style="height:7em;">
+            <div class="col-sm-12">
+                <div class="navbar-header">
+                    <h1>ToDo-System</h1>
+                    <div class="small">
+                        <h5>Der frühe Vogel fängt den Wurm. Zum Glück hat der Döner bis Mitternacht auf...</h5>
+                    </div>
 
-                    </div>
-                    <div class="navbar ">
-                        <ul class="nav navbar-nav navbar-right mr-auto fixed-bottom bg-light" style="display: inline;">
-                            <li><a href="{% url 'ToDoSystem:index' %}">Übersicht</a> </li>
-                        </ul>
-                    </div>
                 </div>
-            </header>
-        </div>
-
-        <main>
-            <article class="col-xs-12">
-                <p>
-                    Diese Webseite wurde erstellt von Anne-Marie Schmidt und Levi Geiser im Zuge des Programierpraktikums "Soziale Netzwerke" des CIT an der TU Berlin.
-                </p>
-                <p>
-                    This Website was developed by Anne-Marie Schmidt and Levi Geiser as part of the Programierpraktikum "Soziale Netzwerke" from CIT at TU Berlin.
-                </p>
-                Kontakt:
-                <a href="mailto:schmidt.10@campus.tu-berlin.de" itemprop="email">schmidt.10@campus.tu-berlin.de</a>.
-		<a href="mailto:levi@mailbox.tu-berlin.de" itemprop="email">levi@mailbox.tu-berlin.de</a>
-            </article>
-        </main>
+                <div class="navbar ">
+                    <ul class="nav navbar-nav navbar-right mr-auto fixed-bottom bg-light" style="display: inline;">
+                        <li><a href="{% url 'ToDoSystem:index' %}">Übersicht</a></li>
+                    </ul>
+                </div>
+            </div>
+        </header>
     </div>
 
-    <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+    <main>
+        <article class="col-xs-12">
+            <p>
+                Diese Webseite wurde erstellt von Anne-Marie Schmidt und Levi Geiser im Zuge des Programierpraktikums
+                "Soziale Netzwerke" des CIT an der TU Berlin.
+            </p>
+            <p>
+                This Website was developed by Anne-Marie Schmidt and Levi Geiser as part of the Programierpraktikum
+                "Soziale Netzwerke" from CIT at TU Berlin.
+            </p>
+            Kontakt:
+            <a href="mailto:schmidt.10@campus.tu-berlin.de" itemprop="email">schmidt.10@campus.tu-berlin.de</a>.
+            <a href="mailto:levi@mailbox.tu-berlin.de" itemprop="email">levi@mailbox.tu-berlin.de</a>
+        </article>
+    </main>
+</div>
+
+<!-- Optional JavaScript -->
+<!-- jQuery first, then Popper.js, then Bootstrap JS -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+        integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+        integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
